@@ -1,3 +1,2 @@
-npm install @supabase/supabase-js @supabase/ssr
-NEXT_PUBLIC_SUPABASE_URL=https://aeuylhrnmeickwdejzbp.supabase.co
-NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=sb_publishable_bC1F9t5I1TMj7utCmjP26w_oKB54li0
+const SUPABASE_URL = "YOUR_SUPABASE_PROJECT_URL";
+const SUPABASE_ANON_KEY = "YOUR_SUPABASE_PUBLISHABLE_KEY";
