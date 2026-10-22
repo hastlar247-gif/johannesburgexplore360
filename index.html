@@ -1100,7 +1100,100 @@
 
     loadSupabaseTours();
   </script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const form = document.getElementById("booking-form");
+  const message = document.getElementById("booking-message");
 
+  if (!form || !message) return;
+
+  // Prevent customers from selecting a past date.
+  const dateInput = document.getElementById("tour_date");
+  if (dateInput) {
+    const today = new Date();
+    const localToday = new Date(
+      today.getTime() - today.getTimezoneOffset() * 60000
+    ).toISOString().split("T")[0];
+
+    dateInput.min = localToday;
+  }
+
+  form.addEventListener("submit", async function (event) {
+    event.preventDefault();
+
+    const button = form.querySelector('button[type="submit"]');
+    button.disabled = true;
+    button.textContent = "Sending request...";
+    message.textContent = "";
+
+    try {
+      if (
+        typeof SUPABASE_URL === "undefined" ||
+        typeof SUPABASE_ANON_KEY === "undefined"
+      ) {
+        throw new Error("Website database settings are missing.");
+      }
+
+      if (!window.supabase) {
+        throw new Error("The database connection library did not load.");
+      }
+
+      const bookingClient = window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_ANON_KEY
+      );
+
+      const booking = {
+        customer_name: document.getElementById("customer_name").value.trim(),
+        customer_email: document.getElementById("customer_email").value.trim(),
+        customer_phone: document.getElementById("customer_phone").value.trim() || null,
+        tour_name: document.getElementById("tour_name").value,
+        tour_date: document.getElementById("tour_date").value,
+        number_of_guests: Number(
+          document.getElementById("number_of_guests").value
+        )
+      };
+
+      if (
+        !booking.customer_name ||
+        !booking.customer_email ||
+        !booking.tour_name ||
+        !booking.tour_date ||
+        !Number.isInteger(booking.number_of_guests) ||
+        booking.number_of_guests < 1 ||
+        booking.number_of_guests > 50
+      ) {
+        throw new Error("Please check your details and try again.");
+      }
+
+      const { error } = await bookingClient
+        .from("bookings")
+        .insert([booking]);
+
+      if (error) {
+        console.error("Booking submission error:", error);
+        throw new Error("We couldn't submit your request. Please try again later.");
+      }
+
+      message.textContent =
+        "Thank you! Your booking request has been received. We will contact you to confirm.";
+      message.style.color = "green";
+      form.reset();
+
+    } catch (error) {
+      console.error("Booking error:", error);
+      message.textContent =
+        error.message || "Something went wrong. Please try again.";
+      message.style.color = "red";
+
+    } finally {
+      button.disabled = false;
+      button.textContent = "Request a Booking";
+    }
+  });
+});
+</script>
+  
 </body>
 </html>
 
