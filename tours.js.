@@ -1,0 +1,38 @@
+async function loadTours() {
+  const { data: tours, error } = await supabaseClient
+    .from("tours")
+    .select("*");
+
+  if (error) {
+    console.error("Error loading tours:", error.message);
+    return;
+  }
+
+  const container = document.getElementById("tours-container");
+
+  if (!container) {
+    console.error("Tours container not found.");
+    return;
+  }
+
+  container.replaceChildren();
+
+  tours.forEach((tour) => {
+    const card = document.createElement("div");
+    card.className = "tour-card";
+
+    const title = document.createElement("h3");
+    title.textContent = tour.name || "Tour";
+
+    const description = document.createElement("p");
+    description.textContent = tour.description || "";
+
+    const price = document.createElement("p");
+    price.textContent = `R${tour.price} per person`;
+
+    card.append(title, description, price);
+    container.appendChild(card);
+  });
+}
+
+loadTours();
