@@ -378,17 +378,20 @@ footer {
   <div id="tours-container"></div>
 </section>
   
-</body><script src="config.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
+<script src="config.js"></script>
+  
+console.log("Supabase connected successfully!");
+  
 <script>
   const supabaseClient = supabase.createClient(
     SUPABASE_URL,
     SUPABASE_ANON_KEY
   );
-  
-  console.log("Supabase connected successfully!");
-
-<script src="tours.js"></script>  
 </script>
+
+<script src="tours.js"></script>
+</body>
 </html>
+
+
