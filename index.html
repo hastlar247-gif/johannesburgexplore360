@@ -820,6 +820,63 @@
 
   <!-- CONTACT -->
 
+  <!-- BOOKING SECTION -->
+<section id="booking" style="padding:60px 20px; background:#f7f7f7;">
+  <div style="max-width:650px; margin:auto;">
+    <h2 style="text-align:center; font-size:32px;">
+      Book Your Johannesburg Experience
+    </h2>
+
+    <p style="text-align:center; margin-bottom:30px;">
+      Choose your tour and send us your booking request.
+      We'll contact you to confirm your booking.
+    </p>
+
+    <form id="booking-form"
+          style="background:white; padding:25px; border-radius:12px;">
+
+      <label for="customer_name">Full Name *</label>
+      <input type="text" id="customer_name" required
+        style="width:100%; padding:12px; margin:8px 0 18px; box-sizing:border-box;">
+
+      <label for="customer_email">Email Address *</label>
+      <input type="email" id="customer_email" required
+        style="width:100%; padding:12px; margin:8px 0 18px; box-sizing:border-box;">
+
+      <label for="customer_phone">Phone Number (Optional)</label>
+      <input type="tel" id="customer_phone"
+        style="width:100%; padding:12px; margin:8px 0 18px; box-sizing:border-box;">
+
+      <label for="tour_name">Choose Your Tour *</label>
+      <select id="tour_name" required
+        style="width:100%; padding:12px; margin:8px 0 18px; box-sizing:border-box;">
+        <option value="">Select a tour</option>
+        <option value="Soweto Walking Tour">Soweto Walking Tour</option>
+        <option value="Johannesburg City Tour">Johannesburg City Tour</option>
+        <option value="Johannesburg Street Art Tour">Johannesburg Street Art Tour</option>
+      </select>
+
+      <label for="tour_date">Preferred Tour Date *</label>
+      <input type="date" id="tour_date" required
+        style="width:100%; padding:12px; margin:8px 0 18px; box-sizing:border-box;">
+
+      <label for="number_of_guests">Number of Guests *</label>
+      <input type="number" id="number_of_guests" min="1" max="50"
+        value="1" required
+        style="width:100%; padding:12px; margin:8px 0 22px; box-sizing:border-box;">
+
+      <button type="submit"
+        style="width:100%; padding:15px; background:#d97706; color:white; border:none; border-radius:6px; font-size:16px; cursor:pointer;">
+        Request a Booking
+      </button>
+
+      <p id="booking-message" role="status"
+        style="margin-top:18px; text-align:center;"></p>
+    </form>
+  </div>
+</section>
+<!-- END BOOKING SECTION -->
+  
   <section class="contact-section" id="contact">
     <div class="container">
 
